@@ -6,7 +6,6 @@
       <button v-on:click="submitFile()">Submit</button>
     </div>
   </div>
-  <audio id="audio-preview" controls v-show="file != ''"/>
 </template>
 
 <script setup>

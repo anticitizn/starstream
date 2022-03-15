@@ -1,23 +1,15 @@
 <template>
   <div class="about">
     <UploadComponent></UploadComponent>
+    <StreamingComponent></StreamingComponent>
   </div>
 </template>
 
 <script>
 import UploadComponent from "../components/uploadComponent.vue";
+import StreamingComponent from "../components/streamingComponent.vue";
 export default {
-  components: {UploadComponent}
+  components: {StreamingComponent, UploadComponent}
 }
 
 </script>
-
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
