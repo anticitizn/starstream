@@ -17,6 +17,21 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/AboutView.vue"),
     },
+    {
+      path: "/upload",
+      name: "upload",
+      component: () => import("../views/UploadView.vue"),
+    },
+    {
+      path: "/metaData",
+      name: "metaData",
+      component: () => import("../views/MetaDataView.vue"),
+    },
+    {
+      path: "/streaming",
+      name: "streaming",
+      component: () => import("../views/StreamingView.vue")
+    }
   ],
 });
 
