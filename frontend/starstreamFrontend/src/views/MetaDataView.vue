@@ -1,9 +1,15 @@
 <template>
-  <div class="about">
-    <h1>This is the metadata page</h1>
+  <div>
+    <SearchComponent></SearchComponent>
+    <MetaDataComponent></MetaDataComponent>
   </div>
 </template>
 
 <style>
 
 </style>
+
+<script setup>
+import MetaDataComponent from "../components/metaDataComponent.vue";
+import SearchComponent from "../components/searchComponent.vue";
+</script>
