@@ -10,7 +10,11 @@
   "dependencies": {
     "@asigloo/vue-dynamic-forms": "^3.18.1",
     "@formkit/vue": "^1.0.0-beta.6",
+    "axios": "^0.26.1",
+    "common.js": "^1.1.1",
     "vue": "^3.2.31",
+    "vue-axios": "^3.4.1",
+    "vue-resource": "^1.5.3",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
@@ -21,5 +25,10 @@
     "eslint-plugin-vue": "^8.2.0",
     "prettier": "^2.5.1",
     "vite": "^2.8.4"
-  }
+  },
+  "description": "This template should help get you started developing with Vue 3 in Vite.",
+  "main": "vite.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

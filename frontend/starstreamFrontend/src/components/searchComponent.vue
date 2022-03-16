@@ -1,42 +1,38 @@
 <template>
-  <div>
-    <input v-model="keyword" placeholder="search" />
-    <div v-for="(f, index) of filterAudios" :key="index">
-      <img :src="f.thumbnail" />
-      <p>{{ f.description }}</p>
+  <div class="search">
+    <form v-on:submit.prevent="getResults(query)">
+      <input type="text" placeholder="query" v-model="query" />
+    </form>
+    <div class="results" v-if="results">
+      <div v-for="result in results">
+        <img v-bind:src="result.links[0].href" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-//Filter und Search-Funktion anpassen
-const audios = [
-  {
-    url: "https://www.youtube.com/watch?v=glN0W8WogK8",
-    thumbnail: "https://i.ytimg.com/vi/lkpSG4VGoVk/mqdefault.jpg",
-    description: "lego death yoda",
-  },
-  {
-    url: "https://images.dog.ceo/breeds/akita/Akita_Inu_dog.jpg",
-    description: "akita",
-  },
-  {
-    url: "https://images.dog.ceo/breeds/retriever-golden/n02099601_7771.jpg",
-    description: "golden retriever",
-  }
-];
-export default {
-  name: "App",
-  data() {
-    return { keyword: "", audios };
-  },
-  computed: {
-    filterAudios() {
-      const { audios, keyword } = this;
-      return audios.filter(({ description }) => description.includes(keyword));
+  export default {
+
+    name: 'search',
+    data () {
+      return {
+        query: '',
+        results: ''
+      }
     },
-  },
-};
+    methods: {
+      getResults (q) {
+        q = q.replace(/ /g, '%20')
+        console.log(q)
+        this.$http.get('https://images-api.nasa.gov/search?q=' + q + '&media_type=image').then(response => {
+          this.results = response.body.collection.items
+        }, response => {
+          console.log('Error: ', response)
+        })
+      }
+    }
+  }
 </script>
 
 <style scoped>

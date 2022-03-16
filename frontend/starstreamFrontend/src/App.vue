@@ -11,6 +11,7 @@ import { RouterLink, RouterView } from "vue-router";
         <RouterLink to="/upload">Upload</RouterLink>
         <RouterLink to="/metaData">Change Metadata</RouterLink>
         <RouterLink to="/streaming">Stream Music</RouterLink>
+        <RouterLink to="/fileJSON">JSONFile</RouterLink>
       </nav>
     </div>
   </header>
