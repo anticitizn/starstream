@@ -13,20 +13,13 @@
     name: 'search',
     data () {
       return {
-        query: '',
-        results: ''
+        searchingName: ''
       }
     },
     methods: {
-      getResults (q) {
-        q = q.replace(/ /g, '%20')
-        console.log(q)
-        this.$http.get('https://images-api.nasa.gov/search?q=' + q + '&media_type=image').then(response => {
-          this.results = response.body.collection.items
-        }, response => {
-          console.log('Error: ', response)
-        })
-      }
+      searchForFileName () {
+          this.axios.get("").then(response => (this.searchingName=response.data));
+        }
     }
   }
 </script>

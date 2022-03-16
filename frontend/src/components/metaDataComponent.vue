@@ -10,8 +10,8 @@
       <label>Name:</label><br>
       <input v-model="name" /><br>
 
-    <label htmlFor="album">Album:</label><br>
-    <input type="text" id="album" name="album"><br>
+      <label>Album:</label><br>
+      <input v-model="album"><br>
 
       <label>Artist:</label><br>
       <input v-model="artist"><br>
