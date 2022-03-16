@@ -1,13 +1,9 @@
 <template>
   <div class="search">
-    <form v-on:submit.prevent="getResults(query)">
-      <input type="text" placeholder="query" v-model="query" />
+    <h1>Search for Song-Name</h1>
+    <form v-on:submit.prevent="searchForFileName()">
+      <input type="text" v-model="searchingName" />
     </form>
-    <div class="results" v-if="results">
-      <div v-for="result in results">
-        <img v-bind:src="result.links[0].href" />
-      </div>
-    </div>
   </div>
 </template>
 
