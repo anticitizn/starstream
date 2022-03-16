@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 from base.models import Song
 
-class MyUploadView(APIView):
+class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
     def put(self, request, format=None):
