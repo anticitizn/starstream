@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.http import FileResponse
 from rest_framework.exceptions import ParseError
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from wsgiref.util import FileWrapper
 
 from base.models import Song
 
@@ -26,8 +28,9 @@ class FileUploadView(APIView):
 class FileDownloadView(APIView):
     def get(self, request):
         song_id = request.GET.get('id', '')
-        if not song_id or id >= Song.objects.count() :
+        if not song_id:
             return Response(status=status.HTTP_404_NOT_FOUND)
         
-        song_file = Song.objects.get(id=song_id).data
-        
+        song_file = Song.objects.get(id=int(song_id)).data
+        response = FileResponse(song_file)
+        return response;

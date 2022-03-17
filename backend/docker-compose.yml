@@ -6,7 +6,7 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - ./entrypoint.sh:/entrypoint.sh
+      - backend-uploads:/uploads/
     ports:
       - "8000:8000"
   db:
@@ -28,3 +28,4 @@ services:
       - 3306
 volumes:
   db-data:
+  backend-uploads:
