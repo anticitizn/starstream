@@ -9,11 +9,13 @@ from base.models import Song
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
-    def put(self, request, format=None):
+    def post(self, request, format=None):
         if 'file' not in request.data:
             raise ParseError("Empty file")
 
-        f = request.data['file']
+        file_obj = request.data['file']
 
-        Song.data.save(f.name, f, save=True)
+        song = Song(data = file_obj)
+        song.save()
+
         return Response(status=status.HTTP_201_CREATED)
