@@ -1,3 +1,4 @@
+from msilib.schema import Class
 from types import NoneType
 import eyed3
 
@@ -80,3 +81,19 @@ class EditMetadataView(APIView):
         song_loaded.tag.release_date = song_release_date
         song_loaded.tag.save()
         return Response(status=status.HTTP_200_OK)
+
+class SearchView(APIView):
+    def get(self, request):
+        search_value = request.GET.get("value", "")
+        if not search_value:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        query = Song.objects.get()
+        results = []
+
+        #fill result
+
+        response = JsonResponse({
+            "results": results
+        })
+        return response
