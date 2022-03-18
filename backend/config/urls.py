@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('upload/', views.FileUploadView.as_view()),
     path('download/', views.FileDownloadView.as_view()),
+    path('getmetadata/', views.GetMetaDataView.as_view()),
 ]
