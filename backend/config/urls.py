@@ -22,4 +22,6 @@ urlpatterns = [
     path('upload/', views.FileUploadView.as_view()),
     path('download/', views.FileDownloadView.as_view()),
     path('getmetadata/', views.GetMetaDataView.as_view()),
+    path('editmetadata/', views.EditMetadataView.as_view()),
+    path('edit/', views.EditMetadataView.as_view()),
 ]
