@@ -17,19 +17,19 @@ export default {
     };
   },
   methods: {
-    setAudioData(){
+    setAudioData() {
       let formData = new FormData();
-      let audioFile = this.audios;
-      formData.append("audio", audioFile);
-      this.axios.post('', formData, {
+      let audioFile = this.file;
+      formData.append("file", audioFile);
+      this.axios.post('http://backend-starstream.localhost:8000/upload/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
     },
 
-    handleFileUpload( event ){
-      this.audios = event.target.files[0];
+    handleFileUpload(event) {
+      this.file = event.target.files[0];
   }
 }
 };
