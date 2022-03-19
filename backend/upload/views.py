@@ -1,5 +1,3 @@
-#from msilib.schema import Class
-from types import NoneType
 import eyed3
 
 from django.shortcuts import render
