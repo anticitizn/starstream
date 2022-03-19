@@ -26,13 +26,11 @@ services:
       - MYSQL_ROOT_PASSWORD=starstreampw
     ports:
       - 3306
-  web:
+  frontend:
     build: frontend
+    container_name: starstream-frontend
     ports:
       - 8080:8080
-    volumes:
-      - ./vuejs:/project
-      - /project/node_modules
 volumes:
   db-data:
   backend-uploads:
