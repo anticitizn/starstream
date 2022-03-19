@@ -1,4 +1,4 @@
-from msilib.schema import Class
+#from msilib.schema import Class
 from types import NoneType
 import eyed3
 
@@ -35,17 +35,18 @@ class FileDownloadView(APIView):
     def get(self, request):
         song_id = request.GET.get('id', '')
         if not song_id:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         
         song_file = Song.objects.get(id=int(song_id)).data
         response = FileResponse(song_file)
-        return response;
+
+        return response
         
 class GetMetaDataView(APIView):
     def get(self, request):
         song_id = request.GET.get('id', '')
         if not song_id:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         
         song_loaded = eyed3.load(Song.objects.get(id=int(song_id)).data.path)
         song_date = None
@@ -60,7 +61,8 @@ class GetMetaDataView(APIView):
             "genre": song_loaded.tag.genre.name,
             "release-date": song_date
         })
-        return response;
+
+        return response
 
 class EditMetadataView(APIView):
     def put(self, request):
@@ -70,8 +72,9 @@ class EditMetadataView(APIView):
         song_artist = request.GET.get('artist', '')
         song_genre = request.GET.get('genre', '')
         song_release_date = request.GET.get('release-date')
+
         if not song_id:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         
         song_loaded = eyed3.load(Song.objects.get(id=int(song_id)).data.path)
         song_loaded.tag.title = song_title
@@ -80,20 +83,28 @@ class EditMetadataView(APIView):
         song_loaded.tag.genre.name = song_genre
         song_loaded.tag.release_date = song_release_date
         song_loaded.tag.save()
+
         return Response(status=status.HTTP_200_OK)
 
 class SearchView(APIView):
     def get(self, request):
         search_value = request.GET.get("value", "")
-        if not search_value:
-            return Response(status=status.HTTP_404_NOT_FOUND)
 
-        query = Song.objects.get()
+        if not search_value:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        songs = Song.objects.get()
         results = []
 
-        #fill result
-
+        for song in songs:
+            song_data = eyed3.load(song.data.path)
+            tags = song_data.tag.title + " " + song_data.tag.album + " " + song_data.tag.album_artist + " "
+            tags += song_data.tag.genre.name + " " + song_data.tag.release_date
+            if search_value in tags:
+                results.append(song)
+        
         response = JsonResponse({
             "results": results
         })
+
         return response
