@@ -2,7 +2,7 @@
   <div class="search">
     <h1>Search for Song-Name</h1>
     <form v-on:submit.prevent="searchForFileName()">
-      <input type="text" v-model="searchingName" />
+      <input type="text" v-model="searchValue" @change="searching( $event )"/>
     </form>
   </div>
 </template>
