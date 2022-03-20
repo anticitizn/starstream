@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import homeComponent from "../components/homeComponent.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomeView,
+      component: homeComponent,
     },
     {
       path: "/about",
@@ -15,22 +15,22 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/AboutView.vue"),
+      component: () => import("../components/aboutComponent.vue"),
     },
     {
       path: "/upload",
       name: "upload",
-      component: () => import("../views/UploadView.vue"),
+      component: () => import("../components/uploadComponent.vue"),
     },
     {
       path: "/metaData",
       name: "metaData",
-      component: () => import("../views/MetaDataView.vue"),
+      component: () => import("../components/metaDataComponent.vue"),
     },
     {
       path: "/streaming",
       name: "streaming",
-      component: () => import("../views/StreamingView.vue")
+      component: () => import("../components/streamingComponent.vue")
     }
   ],
 });
