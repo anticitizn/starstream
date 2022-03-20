@@ -86,20 +86,22 @@ class SetMetadataView(APIView):
 
 class SearchView(APIView):
     def post(self, request):
-        search_value = request.GET.get("value", "")
+        search_value = request.POST.get("value", "")
 
         if not search_value:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        songs = Song.objects.get()
+        songs = [] 
+        songs = Song.objects.filter()
         results = []
 
         for song in songs:
             song_data = eyed3.load(song.data.path)
-            tags = song_data.tag.title + " " + song_data.tag.album + " " + song_data.tag.album_artist + " "
-            tags += song_data.tag.genre.name + " " + song_data.tag.release_date
+            print(song.data.path)
+            tags = str(song_data.tag.title) + " " + str(song_data.tag.album) + " " + str(song_data.tag.album_artist) + " "
+            tags += str(song_data.tag.genre) + " " + str(song_data.tag.release_date)
             if search_value in tags:
-                results.append(song)
+                results.append(song.id)
         
         response = JsonResponse({
             "results": results
