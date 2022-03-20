@@ -62,7 +62,7 @@ class GetMetaDataView(APIView):
 
         return response
 
-class EditMetadataView(APIView):
+class SetMetadataView(APIView):
     def put(self, request):
         song_id = request.GET.get('id', '')
         song_title = request.GET.get('title', '')
@@ -85,7 +85,7 @@ class EditMetadataView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 class SearchView(APIView):
-    def get(self, request):
+    def post(self, request):
         search_value = request.GET.get("value", "")
 
         if not search_value:
