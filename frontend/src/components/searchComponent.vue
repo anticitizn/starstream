@@ -20,7 +20,7 @@
       searchForFileName () {
           this.axios.get('http://backend-starstream.localhost:8000/download/').then(response => (this.searchingName=response.data));
           // this needs to be a POST request
-          // the body must be a JSON with a single key-value pair - "value": "britney spears"
+          // the body must be a JSON with a single key-value pair - { "value": "britney spears" }
           // the response to the request is a JSON containing a list with all matching song IDs
           // then you can get the metadata for every one of them separately
         }

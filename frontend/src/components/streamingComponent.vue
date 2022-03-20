@@ -14,8 +14,8 @@
 <script>
 import axios from "axios";
 
-const res = await axios.get(`http://backend-starstream.localhost:8000/download/`); 
-// need to pass song id as url parameter, like this: http://backend-starstream.localhost:8000/download/?id=3
+const res = await axios.get(`http://backend-starstream.localhost:8000/download/`);
+// need to pass song ID as url parameter, like this: http://backend-starstream.localhost:8000/download/?id=3
 </script>
 
 <style>

@@ -39,9 +39,11 @@ export default {
     };
   },
   methods: {
-    async getMetaData(name){
+    async getMetaData(name) {
       try {
-        const res = await axios.get(`http://localhost:3000/audios`);
+        const res = await axios.get(`http://backend-starstream.localhost:8000/getmetadata/`);
+        // ????????
+        // this only returns the metadata for one song, why iterate over it like an array?
         this.audios = res.data
         for(let i = 0; i < this.audios.length; i++){
           if(this.audios[i].name.includes(name)){
@@ -56,9 +58,11 @@ export default {
         console.log(error);
       }
     },
-    async setMetaData(id){
+    async setMetaData(id) {
       try{
-        const res = await this.axios.patch(`http://localhost:3000/audios/${id}`, {
+        // PUT, not PATCH
+        // ID should be passed inside json, not as URL parameter
+        const res = await this.axios.patch(`http://backend-starstream.localhost:8000/editmetadata/${id}`, {
           name: this.name,
           album: this.album,
           artist: this.artist,
