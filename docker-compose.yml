@@ -9,6 +9,8 @@ services:
       - backend-uploads:/uploads/
     ports:
       - 8000:8000
+      # this should really be an expose: rather than ports: ...
+      # but for some reason inter-container communication doesn't work otherwise 
   db:
     image: mysql
     container_name: starstream-db

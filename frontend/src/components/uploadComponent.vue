@@ -13,7 +13,7 @@ export default {
   name: "upload",
   data() {
     return {
-      audios: [],
+      file: [],
     };
   },
   methods: {
