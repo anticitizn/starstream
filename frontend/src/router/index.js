@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import homeComponent from "../components/homeComponent.vue";
+import homeComponent from "../components/home.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,22 +12,22 @@ const router = createRouter({
     {
       path: "/about",
       name: "about",
-      component: () => import("../components/aboutComponent.vue"),
+      component: () => import("../components/about.vue"),
     },
     {
       path: "/upload",
       name: "upload",
-      component: () => import("../components/uploadComponent.vue"),
+      component: () => import("../components/upload.vue"),
     },
     {
       path: "/metaData",
       name: "metaData",
-      component: () => import("../components/metaDataComponent.vue"),
+      component: () => import("../components/metadata.vue"),
     },
     {
       path: "/streaming",
       name: "streaming",
-      component: () => import("../components/streamingComponent.vue")
+      component: () => import("../components/streaming.vue")
     }
   ],
 });
