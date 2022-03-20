@@ -40,7 +40,7 @@ class FileDownloadView(APIView):
 
         return response
         
-class GetMetaDataView(APIView):
+class GetMetadataView(APIView):
     def get(self, request):
         song_id = request.GET.get('id', '')
         if not song_id:

@@ -2,7 +2,7 @@
 <template>
   <div>
     <h1>File Upload</h1>
-    <input type="file" accept="audio/*" @change="handleFileUpload( $event )"/>
+    <input type="file" accept="audio/*" @change="setAudioData()"/>
     <br>
     <button v-on:click="setAudioData()">Upload File</button>
   </div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "upload",
+  name: "Upload",
   data() {
     return {
       file: [],
