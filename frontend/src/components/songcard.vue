@@ -21,7 +21,7 @@
 
 <script>
   export default {
-    name: 'Song',
+    name: 'SongCard',
     props: {
         song: {
             id: Number,
@@ -29,8 +29,11 @@
             artist: String,
             album: String,
             genre: String,
-            required: true
+            required: true,
         }
+    },
+    created() {
+      console.log(this.song)
     },
     data () {
       return {

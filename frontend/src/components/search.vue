@@ -5,11 +5,24 @@
       <input type="text" v-model="searchValue" @change="searching( $event )"/>
     </form>
   </div>
+  <SongCard v-for="(item, index) in songs" :song="item.value" :key="item.id"/>
 </template>
 
 <script>
+import { ref } from 'vue'
+import data from '../assets/testsong.js'
+import SongCard from "./songcard.vue";
+
   export default {
     name: "Search",
+    components: { SongCard },
+    setup() {
+        const testsong = ref(data)
+        const songs = [testsong, testsong]
+        return {
+           songs
+        }
+    },
     methods: {
         searchForFileName() {
             this.axios.get("http://backend-starstream.localhost:8000/download/").then(response => (this.searchingName = response.data));
