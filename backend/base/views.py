@@ -86,10 +86,10 @@ class SetMetadataView(APIView):
 
 class SearchView(APIView):
     def post(self, request):
-        search_value = request.POST.get("value", "")
-
-        if not search_value:
+        if 'value' not in request.data:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+        search_value = request.data['value']           
 
         songs = [] 
         songs = Song.objects.filter()

@@ -27,8 +27,8 @@ import axios from "axios";
     },
     methods: {
         searchForFileName() {
-            let request = { value: this.searchValue}
-            axios.post("http://backend-starstream.localhost:8000/search/", request).then(response => (songs = response.data))
+            let searchRequest = { value: this.searchValue}
+            axios.post("http://backend-starstream.localhost:8000/search/", searchRequest).then(response => (songs = response.data))
             // this needs to be a POST request
             // the body must be a JSON with a single key-value pair - { "value": "britney spears" }
             // the response to the request is a JSON containing a list with all matching song IDs
