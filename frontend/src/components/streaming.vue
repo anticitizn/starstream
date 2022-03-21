@@ -4,11 +4,12 @@
     <form v-on:dblclick="getMetaData(searchingName)">
       <input type="text" v-model="searchingName" />
     </form>
+    <div class="about">
+      <h1>This is the streaming page</h1>
+      <audio id="audio-preview" controls />
+    </div>
   </div>
-  <div class="about">
-    <h1>This is the streaming page</h1>
-    <audio id="audio-preview" controls />
-  </div>
+
 </template>
 
 <script>

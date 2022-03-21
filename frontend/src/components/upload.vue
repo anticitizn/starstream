@@ -5,15 +5,21 @@
     <input type="file" accept="audio/*" @change="setAudioData()"/>
     <br>
     <button v-on:click="setAudioData()">Upload File</button>
+    <button @click="store.increment()">
+      From Upload: {{ store.count }}
+    </button>
   </div>
+
 </template>
 
 <script>
+import { store } from 'store.js'
 export default {
   name: "Upload",
   data() {
     return {
       file: [],
+      store
     };
   },
   methods: {
