@@ -1,5 +1,0 @@
-TO-DO:
-
-Funktionen für die Searchbar anpassen an das Backend
-MetaDaten als JSON an das Backend
-Searchbar-Ergebnisse an das Audio übergeben
