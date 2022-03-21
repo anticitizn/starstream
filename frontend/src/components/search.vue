@@ -5,7 +5,7 @@
       <input type="text" placeholder="Start searching!" v-model="searchValue"/>
     </form>
   </div>
-  <SongCard v-for="(item, index) in songs" :song="item.value" :key="item.id"/>
+  <SongCard v-for="item in songs" :song="item" :key="item.id"/>
 </template>
 
 <script>
@@ -18,21 +18,20 @@ import axios from "axios";
     name: "Search",
     components: { SongCard },
     data() {
-        const testsong = ref(data)
-        let songs = [testsong, testsong]
+        let songs = []
         return {
-           songs,
-           searchValue: ""
+           songs
         }
     },
     methods: {
         searchForFileName() {
+            this.songs.length = 0 // clear the array while making sure that reference isn't lost
             let searchRequest = { value: this.searchValue}
-            axios.post("http://backend-starstream.localhost:8000/search/", searchRequest).then(response => (songs = response.data))
-            // this needs to be a POST request
-            // the body must be a JSON with a single key-value pair - { "value": "britney spears" }
-            // the response to the request is a JSON containing a list with all matching song IDs
-            // then you can get the metadata for every one of them separately
+            axios.post("http://backend-starstream.localhost:8000/search/", searchRequest).then(response => {
+              response.data.results.forEach(songId => {
+                axios.get("http://backend-starstream.localhost:8000/getmetadata/?id=" + songId).then(response => (this.songs.push(response.data)))
+              })
+            })
         }
     }
 }

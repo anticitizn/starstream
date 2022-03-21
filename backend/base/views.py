@@ -1,4 +1,5 @@
 import eyed3
+import logging
 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -27,6 +28,11 @@ class FileUploadView(APIView):
         song = Song(data = song_file)
         song.save()
 
+        song_data = eyed3.load(song.data.path)
+        if not song_data.tag:
+            song_data.initTag()
+        
+        song_data.tag.save()
         return Response(status=status.HTTP_201_CREATED)
 
 class FileDownloadView(APIView):
@@ -46,18 +52,13 @@ class GetMetadataView(APIView):
         if not song_id:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
-        song_loaded = eyed3.load(Song.objects.get(id=int(song_id)).data.path)
-        song_date = None
-        if not isinstance(song_loaded.tag.release_date, NoneType):
-            song_date = datetime(song_loaded.tag.release_date.year, song_loaded.tag.release_date.month, song_loaded.tag.release_date.day).strftime("%Y-%m-%d")
-        
+        song_data = eyed3.load(Song.objects.get(id=int(song_id)).data.path)
         
         response = JsonResponse({
-            "title": song_loaded.tag.title,
-            "album": song_loaded.tag.album,
-            "artist": song_loaded.tag.album_artist,
-            "genre": song_loaded.tag.genre.name,
-            "release-date": song_date
+            "title": song_data.tag.title if song_data.tag.title else Song.data.filename,
+            "artist": song_data.tag.artist if song_data.tag.artist else " ",
+            "album": song_data.tag.album if song_data.tag.album else " ",
+            "genre": song_data.tag.genre if song_data.tag.genre else " "
         })
 
         return response
@@ -89,7 +90,7 @@ class SearchView(APIView):
         if 'value' not in request.data:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
-        search_value = request.data['value']           
+        search_value = request.data['value']
 
         songs = [] 
         songs = Song.objects.filter()
@@ -97,7 +98,7 @@ class SearchView(APIView):
 
         for song in songs:
             song_data = eyed3.load(song.data.path)
-            print(song.data.path)
+            
             tags = str(song_data.tag.title) + " " + str(song_data.tag.album) + " " + str(song_data.tag.album_artist) + " "
             tags += str(song_data.tag.genre) + " " + str(song_data.tag.release_date)
             if search_value in tags:
@@ -105,6 +106,15 @@ class SearchView(APIView):
         
         response = JsonResponse({
             "results": results
+        })
+
+        return response
+
+class TestView(APIView):
+    def get(self, request):
+        songs = Song.objects.filter()
+        response = JsonResponse({
+            "results": songs[0].data.path
         })
 
         return response
