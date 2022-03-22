@@ -1,24 +1,28 @@
 <template>
+  <Upload/>
   <div class="search">
     <h1>Search for Song-Name</h1>
     <form v-on:submit.prevent="searchForFileName()">
       <input type="text" placeholder="Start searching!" v-model="searchValue"/>
     </form>
   </div>
-  <SongCard v-for="item in songs" :song="item" :key="item.id"/>
+  <component :is="item.state" v-for="item in songContainers" :state="item" :key="item.id"/>
 </template>
 
 <script>
-import SongCard from "./songcard.vue";
+import Collapsed from "./collapsed.vue";
+import Upload from "./upload.vue";
 import axios from "axios";
 
 export default {
   name: "Search",
-  components: { SongCard },
+  components: { Collapsed, Upload},
   data() {
       let songs = []
+      let songContainers = []
       return {
-          songs
+          songs,
+          songContainers
       }
   },
   methods: {
@@ -27,7 +31,7 @@ export default {
           let searchRequest = { value: this.searchValue}
           axios.post("http://backend-starstream.localhost:8000/search/", searchRequest).then(response => {
             response.data.results.forEach(songId => {
-              axios.get("http://backend-starstream.localhost:8000/getmetadata/?id=" + songId).then(response => (this.songs.push(response.data)))
+              this.songContainers.push({ state: "Collapsed", id: songId })
             })
           })
       }
