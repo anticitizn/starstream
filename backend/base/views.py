@@ -31,6 +31,7 @@ class FileUploadView(APIView):
         song_data = eyed3.load(song.data.path)
         if not song_data.tag:
             song_data.initTag()
+        song_data.tag.genre = 12
         
         song_data.tag.save()
         return Response(status=status.HTTP_201_CREATED)
@@ -48,6 +49,7 @@ class FileDownloadView(APIView):
         
 class GetMetadataView(APIView):
     def get(self, request):
+        eyed3.log.setLevel("ERROR") # really stupid placing but idk where else to put it
         song_id = request.GET.get('id', '')
         if not song_id:
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -55,33 +57,36 @@ class GetMetadataView(APIView):
         song_data = eyed3.load(Song.objects.get(id=int(song_id)).data.path)
         
         response = JsonResponse({
-            "title": song_data.tag.title if song_data.tag.title else Song.data.filename,
-            "artist": song_data.tag.artist if song_data.tag.artist else " ",
-            "album": song_data.tag.album if song_data.tag.album else " ",
-            "genre": song_data.tag.genre if song_data.tag.genre else " "
+            "title": song_data.tag.title if song_data.tag.title else Song.objects.get(id=int(song_id)).data.filename,
+            "artist": song_data.tag.artist if song_data.tag.artist else "Undefined Artist",
+            "album": song_data.tag.album if song_data.tag.album else "Undefined Album",
+            "genre": str(song_data.tag.genre) if song_data.tag.genre else "Undefined Genre"
         })
 
         return response
 
 class SetMetadataView(APIView):
-    def put(self, request):
-        song_id = request.GET.get('id', '')
-        song_title = request.GET.get('title', '')
-        song_album = request.GET.get('album', '')
-        song_artist = request.GET.get('artist', '')
-        song_genre = request.GET.get('genre', '')
-        song_release_date = request.GET.get('release-date')
+    def post(self, request):
+        song_id = request.data['id']
+        song_title = request.data['title']
+        song_album = request.data['album']
+        song_artist = request.data['artist']
+        song_genre = request.data['genre']
 
         if not song_id:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
-        song_loaded = eyed3.load(Song.objects.get(id=int(song_id)).data.path)
-        song_loaded.tag.title = song_title
-        song_loaded.tag.album = song_album
-        song_loaded.tag.album_artist = song_artist 
-        song_loaded.tag.genre.name = song_genre
-        song_loaded.tag.release_date = song_release_date
-        song_loaded.tag.save()
+        song_data = eyed3.load(Song.objects.get(id=int(song_id)).data.path)
+        if song_title:
+            song_data.tag.title = song_title 
+        if song_album:
+            song_data.tag.album = song_album 
+        if song_artist:
+            song_data.tag.album_artist = song_artist 
+        if song_genre:
+            song_data.tag.genre = song_genre  
+
+        song_data.tag.save()
 
         return Response(status=status.HTTP_200_OK)
 

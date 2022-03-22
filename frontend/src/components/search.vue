@@ -12,22 +12,22 @@
 <script>
 import Collapsed from "./collapsed.vue";
 import Upload from "./upload.vue";
+import Editor from "./editor.vue";
+import Player from "./player.vue";
 import axios from "axios";
 
 export default {
   name: "Search",
-  components: { Collapsed, Upload},
+  components: { Collapsed, Upload, Editor, Player},
   data() {
-      let songs = []
       let songContainers = []
       return {
-          songs,
           songContainers
       }
   },
   methods: {
       searchForFileName() {
-          this.songs.length = 0 // clear the array while making sure that reference isn't lost
+          this.songContainers.length = 0 // clear the array while making sure that reference isn't lost
           let searchRequest = { value: this.searchValue}
           axios.post("http://backend-starstream.localhost:8000/search/", searchRequest).then(response => {
             response.data.results.forEach(songId => {

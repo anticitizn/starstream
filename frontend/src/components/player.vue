@@ -5,8 +5,11 @@
           <p class="secondary-info">{{ this.song.album }} - {{ this.song.genre }}</p>
       </div>
       <div class="song-box-buttons">
-          <button class="play-button" v-on:click="play">Play</button>
+          <button class="back-button" v-on:click="back">Stop</button>
           <button class="edit-button" v-on:click="edit">Edit</button>
+      </div>
+      <div class="song-player">
+        <audio :src="audioFile" controls></audio>
       </div>
   </div>
 </template>
@@ -15,7 +18,7 @@
 import axios from "axios";
 
 export default {
-  name: 'Collapsed',
+  name: 'Player',
   props: {
     state: {
       state: String,
@@ -26,21 +29,24 @@ export default {
     axios.get("http://backend-starstream.localhost:8000/getmetadata/?id=" + this.state.id).then(response => {
       this.song = response.data
     })
+
+    this.audioFile = "http://backend-starstream.localhost:8000/download/?id=" + this.state.id
   },
   data () {
     return {
-        song: {
-          title: String,
-          artist: String,
-          album: String,
-          genre: String,
-          required: true
-      }
+      song: {
+        title: String,
+        artist: String,
+        album: String,
+        genre: String,
+        required: true
+      },
+      audioFile: ""
     }
   },
   methods: {
-    play() {
-      this.state.state = "Player"
+    back() {
+      this.state.state = "Collapsed"
     },
     edit() {
       this.state.state = "Editor"

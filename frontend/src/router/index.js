@@ -10,26 +10,11 @@ const router = createRouter({
       component: homeComponent,
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("../components/about.vue"),
-    },
-    {
       path: "/upload",
       name: "upload",
       component: () => import("../components/upload.vue"),
-    },
-    {
-      path: "/metaData",
-      name: "metaData",
-      component: () => import("../components/metadata.vue"),
-    },
-    {
-      path: "/streaming",
-      name: "streaming",
-      component: () => import("../components/streaming.vue")
     }
-  ],
+  ]
 });
 
 export default router;
