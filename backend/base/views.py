@@ -60,7 +60,7 @@ class GetMetadataView(APIView):
             "title": song_data.tag.title if song_data.tag.title else Song.objects.get(id=int(song_id)).data.filename,
             "artist": song_data.tag.artist if song_data.tag.artist else "Undefined Artist",
             "album": song_data.tag.album if song_data.tag.album else "Undefined Album",
-            "genre": str(song_data.tag.genre) if song_data.tag.genre else "Undefined Genre"
+            "genre": song_data.tag.genre.name if not isinstance(song_data.tag.genre, type(None)) else "Undefined Genre"
         })
 
         return response
