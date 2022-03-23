@@ -1,7 +1,6 @@
 
 <template>
   <div>
-    <h1>File Upload</h1>
     <input type="file" accept="audio/*" @change="onFilePicked"/>
   </div>
 

@@ -1,7 +1,5 @@
 <template>
-  <Upload/>
-  <div class="search">
-    <h1>Search for Song-Name</h1>
+  <div class="search-box">
     <form v-on:submit.prevent="searchForFileName()">
       <input type="text" placeholder="Start searching!" v-model="searchValue"/>
     </form>
@@ -11,18 +9,18 @@
 
 <script>
 import Collapsed from "./collapsed.vue";
-import Upload from "./upload.vue";
 import Editor from "./editor.vue";
-import Player from "./player.vue";
 import axios from "axios";
 
 export default {
   name: "Search",
-  components: { Collapsed, Upload, Editor, Player},
+  components: { Collapsed, Editor },
   data() {
       let songContainers = []
+      let searchValue = ""
       return {
-          songContainers
+          songContainers,
+          searchValue
       }
   },
   methods: {

@@ -82,7 +82,7 @@ class SetMetadataView(APIView):
         if song_album:
             song_data.tag.album = song_album 
         if song_artist:
-            song_data.tag.album_artist = song_artist 
+            song_data.tag.artist = song_artist 
         if song_genre:
             song_data.tag.genre = song_genre  
 
@@ -92,10 +92,10 @@ class SetMetadataView(APIView):
 
 class SearchView(APIView):
     def post(self, request):
-        if 'value' not in request.data:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        
         search_value = request.data['value']
+
+        if not search_value:
+            search_value = ""  
 
         songs = [] 
         songs = Song.objects.filter()

@@ -1,0 +1,15 @@
+body {
+    background-color: #14213d;
+    font-family: 'Space Mono', monospace;
+}
+
+h1 {
+    color: #000000;
+    font-size: 96px;
+}
+
+p {
+    color: #000000;
+}
+
+/* palette: #000000 #14213D #FCA311 #E5E5E5 #FFFFFF */

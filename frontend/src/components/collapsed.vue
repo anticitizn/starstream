@@ -5,8 +5,10 @@
           <p class="secondary-info">{{ this.song.album }} - {{ this.song.genre }}</p>
       </div>
       <div class="song-box-buttons">
-          <button class="play-button" v-on:click="play">Play</button>
           <button class="edit-button" v-on:click="edit">Edit</button>
+      </div>
+      <div class="song-player">
+        <audio :src="audioFile" controls></audio>
       </div>
   </div>
 </template>
@@ -26,6 +28,7 @@ export default {
     axios.get("http://backend-starstream.localhost:8000/getmetadata/?id=" + this.state.id).then(response => {
       this.song = response.data
     })
+    this.audioFile = "http://backend-starstream.localhost:8000/download/?id=" + this.state.id
   },
   data () {
     return {
@@ -35,7 +38,8 @@ export default {
           album: String,
           genre: String,
           required: true
-      }
+      },
+      audioFile: ""
     }
   },
   methods: {
@@ -49,6 +53,15 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+  .song-container {
+    background: #e5e5e5;
+    width: 100%;
+    height: 15vh;
+    min-height: 150px;
+    padding: 10px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px;
+  }
 </style>
