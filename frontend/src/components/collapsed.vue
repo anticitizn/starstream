@@ -28,10 +28,10 @@ export default {
     }
   },
   created() {
-    axios.get("http://backend-starstream.localhost:8000/getmetadata/?id=" + this.state.id).then(response => {
+    axios.get("http://localhost:8000/getmetadata/?id=" + this.state.id).then(response => {
       this.song = response.data
     })
-    this.audioFile = "http://backend-starstream.localhost:8000/download/?id=" + this.state.id
+    this.audioFile = "http://localhost:8000/download/?id=" + this.state.id
   },
   data () {
     return {

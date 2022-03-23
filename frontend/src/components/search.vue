@@ -27,7 +27,7 @@ export default {
       searchForFileName() {
           this.songContainers.length = 0 // clear the array while making sure that reference isn't lost
           let searchRequest = { value: this.searchValue}
-          axios.post("http://backend-starstream.localhost:8000/search/", searchRequest).then(response => {
+          axios.post("http://localhost:8000/search/", searchRequest).then(response => {
             response.data.results.forEach(songId => {
               this.songContainers.push({ state: "Collapsed", id: songId })
             })

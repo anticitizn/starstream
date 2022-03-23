@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-e48+3^i*4di_h=@_#h6$x!dxc)+32b@*mu-5^tsr92!wzsq9z-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ 'starstream_backend', '172.19.0.4', 'localhost']
 
 
 # Application definition

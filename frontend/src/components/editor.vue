@@ -52,7 +52,7 @@ export default {
   }
 },
   created() {
-    axios.get("http://backend-starstream.localhost:8000/getmetadata/?id=" + this.state.id).then(response => {
+    axios.get("http://localhost:8000/getmetadata/?id=" + this.state.id).then(response => {
       this.song = response.data
     })
   },
@@ -66,7 +66,7 @@ export default {
         genre: this.song.genre
         }
 
-      axios.post("http://backend-starstream.localhost:8000/setmetadata/", request)
+      axios.post("http://localhost:8000/setmetadata/", request)
       this.state.state = "Collapsed"
     },
     reject() {

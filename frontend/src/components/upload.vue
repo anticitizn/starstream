@@ -1,9 +1,9 @@
 
 <template>
   <div>
-    <input id="upload" style="display: none;" type="file" accept="audio/*" @change="onFilePicked"/>
     <div class="upload-button-container">
-      <button :class="{'upload-button': !hasUploaded, 'upload-button-success': hasUploaded}" for="upload">Upload</button>
+      <input id="upload" style="display: none;" type="file" accept="audio/*" @change="onFilePicked"/>
+      <label :class="{'upload-button': !hasUploaded, 'upload-button-success': hasUploaded}" for="upload">Upload</label>
     </div>
   </div>
 
@@ -24,7 +24,7 @@ export default {
       let formData = new FormData();
       formData.append("file", audioFile);
 
-      this.axios.post('http://backend-starstream.localhost:8000/upload/', formData, {
+      this.axios.post('http://localhost:8000/upload/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -44,6 +44,7 @@ export default {
   cursor: pointer;
   color: #000000;
   font-weight: bold;
+  text-align: center;
   background-color: #ffffff;
   width: 100%;
   height: 5vh;
@@ -63,6 +64,7 @@ export default {
   cursor: pointer;
   color: #000000;
   font-weight: bold;
+  text-align: center;
   background-color: #6db959;
   width: 100%;
   height: 5vh;

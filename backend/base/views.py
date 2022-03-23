@@ -29,8 +29,7 @@ class FileUploadView(APIView):
         song.save()
 
         song_data = eyed3.load(song.data.path)
-        if not song_data.tag:
-            song_data.initTag()
+        song_data.initTag()
         song_data.tag.genre = 12
         
         song_data.tag.save()
@@ -57,7 +56,7 @@ class GetMetadataView(APIView):
         song_data = eyed3.load(Song.objects.get(id=int(song_id)).data.path)
         
         response = JsonResponse({
-            "title": song_data.tag.title if song_data.tag.title else Song.objects.get(id=int(song_id)).data.filename,
+            "title": song_data.tag.title if song_data.tag.title else Song.objects.get(id=int(song_id)).data.name,
             "artist": song_data.tag.artist if song_data.tag.artist else "Undefined Artist",
             "album": song_data.tag.album if song_data.tag.album else "Undefined Album",
             "genre": song_data.tag.genre.name if not isinstance(song_data.tag.genre, type(None)) else "Undefined Genre"
@@ -84,7 +83,7 @@ class SetMetadataView(APIView):
         if song_artist:
             song_data.tag.artist = song_artist 
         if song_genre:
-            song_data.tag.genre = song_genre  
+            song_data.tag.genre = song_genre
 
         song_data.tag.save()
 
@@ -95,7 +94,7 @@ class SearchView(APIView):
         search_value = request.data['value']
 
         if not search_value:
-            search_value = ""  
+            search_value = ""
 
         songs = [] 
         songs = Song.objects.filter()
@@ -104,7 +103,7 @@ class SearchView(APIView):
         for song in songs:
             song_data = eyed3.load(song.data.path)
             
-            tags = str(song_data.tag.title) + " " + str(song_data.tag.album) + " " + str(song_data.tag.album_artist) + " "
+            tags = str(song_data.tag.title) + " " + str(song_data.tag.album) + " " + str(song_data.tag.artist) + " "
             tags += str(song_data.tag.genre) + " " + str(song_data.tag.release_date)
             if search_value in tags:
                 results.append(song.id)
