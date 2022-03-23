@@ -1,14 +1,30 @@
 <template>
   <div class="song-container">
       <div class="song-metadata">
-          <input class="input-title" v-model="this.song.title">
-          <input class="input-artist" v-model="this.song.artist">
-          <input class="input-album" v-model="this.song.album">
-          <input class="input-genre" v-model="this.song.genre">
+        <div class="row">
+          <div class="col-sm">
+            <input class="input-title" v-model="this.song.title">
+          </div>
+          <div class="col-sm">
+            <input class="input-artist" v-model="this.song.artist">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <input class="input-album" v-model="this.song.album">
+          </div>
+          <div class="col-sm">
+            <input class="input-genre" v-model="this.song.genre">
+          </div>
+        </div>
       </div>
-      <div class="song-box-buttons">
+      <div class="song-box-buttons row">
+        <div class="col-sm">
           <button class="accept-button" v-on:click="accept">Accept</button>
+        </div>
+        <div class="col-sm">
           <button class="reject-button" v-on:click="reject">Reject</button>
+        </div>
       </div>
   </div>
 </template>
@@ -62,4 +78,30 @@ export default {
 
 <style scoped>
 
+  input {
+    width: 100%;
+    padding: 3px;
+    border-color: #E5E5E5;
+    border-radius: 20px;
+  }
+
+  button {
+    cursor: pointer;
+    color: #000000;
+    font-weight: bold;
+    background-color: #ffffff;
+    width: 100%;
+    height: 30px;
+    border-color: #E5E5E5;
+    border-radius: 20px;
+    transition: background-color 0.5s;
+  }
+
+  button:hover {
+    background-color: #FCA311;
+  }
+
+  .col-sm {
+    margin: 10px;
+  }
 </style>

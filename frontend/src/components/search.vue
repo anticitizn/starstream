@@ -1,7 +1,7 @@
 <template>
   <div class="search-box">
     <form v-on:submit.prevent="searchForFileName()">
-      <input type="text" placeholder="Start searching!" v-model="searchValue"/>
+      <input class="search-bar" type="text" placeholder="Start searching!" v-model="searchValue"/>
     </form>
   </div>
   <component :is="item.state" v-for="item in songContainers" :state="item" :key="item.id"/>
@@ -38,6 +38,14 @@ export default {
 </script>
 
 <style scoped>
-
+.search-bar {
+  width: 100%;
+  height: 5vh;
+  min-height: 50px;
+  padding: 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 20px;
+}
 </style>
 
