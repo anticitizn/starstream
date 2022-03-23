@@ -1,17 +1,16 @@
+<template>
+    <Search/>
+</template>
+
 <script>
-import search from './search.vue';
+import Search from './search.vue';
+import Upload from './upload.vue';
 export default {
   name: 'Home',
-  components: {
-    search
-  }
+  components: { Search, Upload }
 }
 </script>
 
-<template>
-  <header>
-  </header>
-  <body>
-    <search/>
-  </body>
-</template>
+<style scoped>
+
+</style>
