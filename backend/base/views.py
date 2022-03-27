@@ -140,12 +140,3 @@ class SearchView(APIView):
         })
 
         return response
-
-class TestView(APIView):
-    def get(self, request):
-        songs = Song.objects.filter()
-        response = JsonResponse({
-            "results": songs[0].data.path
-        })
-
-        return response
