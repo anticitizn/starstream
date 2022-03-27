@@ -1,16 +1,22 @@
 <template>
   <div class="song-container">
-    <div class="row">
-      <div class="song-metadata col-sm-10">
-        <p class="primary-info" style="font-weight: bold;">{{ this.song.title }} - {{ this.song.artist }}</p>
-        <p class="secondary-info">{{ this.song.album }} | {{ this.song.genre }}</p>
+    <div class="row" style="height: 100%;">
+      <div class="col-sm-2 song-img-container">
+        <img class="song-img" :src="this.songImage">
       </div>
-      <div class="song-box-buttons col-sm-2">
-        <button class="edit-button" v-on:click="edit">Edit</button>
+      <div class="row col-sm-10 song-metadata">
+        <div class="col-sm-10">
+          <p class="primary-info" style="font-weight: bold;">{{ this.song.title }} - {{ this.song.artist }}</p>
+          <p class="secondary-info">{{ this.song.album }} | {{ this.song.genre }}</p>
+        </div>
+        <div class="song-box-buttons col-sm-2">
+          <button class="edit-button" v-on:click="edit">Edit</button>
+        </div>
+        <div class="song-player">
+          <audio :src="audioFile" controls></audio>
+        </div>
       </div>
-    </div>
-    <div class="song-player">
-      <audio :src="audioFile" controls></audio>
+      
     </div>
   </div>
   
@@ -32,6 +38,7 @@ export default {
       this.song = response.data
     })
     this.audioFile = "http://localhost:8000/download/?id=" + this.state.id
+    this.songImage = "http://localhost:8000/getimage/?id=" + this.state.id
   },
   data () {
     return {
@@ -42,7 +49,8 @@ export default {
           genre: String,
           required: true
       },
-      audioFile: ""
+      audioFile: "",
+      songImage: ""
     }
   },
   methods: {
@@ -57,6 +65,10 @@ export default {
 </script>
 
 <style>
+  .song-metadata {
+    margin-top: 10px;
+  }
+
   .edit-button {
     cursor: pointer;
     color: #000000;
@@ -78,12 +90,19 @@ export default {
   .song-container {
     background: #ffffff;
     width: 100%;
-    height: 18vh;
-    min-height: 170px;
-    padding: 10px;
+    height: 170px;
     border-radius: 20px;
     overflow: hidden;
     margin: 20px;
+  }
+
+  .song-img {
+    border-radius: 20px;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
   }
 
   audio {

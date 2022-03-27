@@ -1,5 +1,5 @@
 <template>
-  <div class="song-container">
+  <div class="song-container" id="song-container-editor">
       <div class="song-metadata">
         <div class="row">
           <div class="col-sm">
@@ -15,6 +15,14 @@
           </div>
           <div class="col-sm">
             <input class="input-genre" v-model="this.song.genre">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="upload-button-container">
+              <input id="upload" style="display: none;" type="file" accept="image/*" @change="onFilePicked"/>
+              <label :class="{'upload-button': !hasUploaded, 'upload-button-success': hasUploaded}" for="upload">Upload</label>
+            </div>
           </div>
         </div>
       </div>
@@ -47,10 +55,12 @@ export default {
         artist: String,
         album: String,
         genre: String,
+        image: String,
         required: true
+      },
+      hasUploaded: false
     }
-  }
-},
+  },
   created() {
     axios.get("http://localhost:8000/getmetadata/?id=" + this.state.id).then(response => {
       this.song = response.data
@@ -63,20 +73,41 @@ export default {
         title: this.song.title, 
         artist: this.song.artist, 
         album: this.song.album, 
-        genre: this.song.genre
-        }
+        genre: this.song.genre,
+        image: this.song.image
+      }
 
       axios.post("http://localhost:8000/setmetadata/", request)
       this.state.state = "Collapsed"
     },
     reject() {
       this.state.state = "Collapsed"
+    },
+    onFilePicked(event) {
+      let imageFile = event.target.files[0]
+
+      const reader = new FileReader()
+        reader.onload = (e) => {
+          this.song.image = e.target.result;
+        };
+
+        reader.readAsDataURL(imageFile)
+
+      // set upload button color to green for 2 seconds
+      this.hasUploaded = true
+      setTimeout(()=>{
+        this.hasUploaded = false
+      },2000);
     }
   }
 }
 </script>
 
 <style scoped>
+
+  #song-container-editor {
+    height: 220px;
+  }
 
   input {
     width: 100%;
@@ -104,4 +135,41 @@ export default {
   .col-sm {
     margin: 10px;
   }
+
+  .upload-button {
+  cursor: pointer;
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
+  background-color: #ffffff;
+  width: 100%;
+  height: 30px;
+  min-height: 50px;
+  padding: 10px;
+  border: -2px solid;
+  border-color: #E5E5E5;
+  border-radius: 20px;
+  transition: background-color 0.5s;
+}
+
+.upload-button:hover {
+  background-color: #FCA311;
+}
+
+.upload-button-success {
+  cursor: pointer;
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
+  background-color: #6db959;
+  width: 100%;
+  height: 30px;
+  min-height: 50px;
+  padding: 10px;
+  border: -2px solid;
+  border-color: #E5E5E5;
+  border-radius: 20px;
+  transition: background-color 0.5s;
+}
+
 </style>

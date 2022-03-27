@@ -1,12 +1,9 @@
 
 <template>
-  <div>
-    <div class="upload-button-container">
-      <input id="upload" style="display: none;" type="file" accept="audio/*" @change="onFilePicked"/>
-      <label :class="{'upload-button': !hasUploaded, 'upload-button-success': hasUploaded}" for="upload">Upload</label>
-    </div>
+  <div class="upload-button-container">
+    <input id="upload" style="display: none;" type="file" accept="audio/*" @change="onFilePicked"/>
+    <label :class="{'upload-button': !hasUploaded, 'upload-button-success': hasUploaded}" for="upload">Upload</label>
   </div>
-
 </template>
 
 <script>
@@ -30,6 +27,7 @@ export default {
         }
       })
 
+      // set upload button color to green for 2 seconds
       this.hasUploaded = true
       setTimeout(()=>{
         this.hasUploaded = false
@@ -74,7 +72,6 @@ export default {
   border-color: #E5E5E5;
   border-radius: 20px;
   transition: background-color 0.5s;
-  
 }
 
 </style>

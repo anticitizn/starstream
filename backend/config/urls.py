@@ -25,5 +25,6 @@ urlpatterns = [
     path('setmetadata/', views.SetMetadataView.as_view()),
     path('edit/', views.GetMetadataView.as_view()),
     path('search/', views.SearchView.as_view()),
+    path('getimage/', views.GetImageView.as_view()),
     path('test/', views.TestView.as_view()),
 ]
