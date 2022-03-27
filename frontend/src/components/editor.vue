@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col">
+          <div class="col-sm">
             <div class="upload-button-container">
               <input id="upload" style="display: none;" type="file" accept="image/*" @change="onFilePicked"/>
               <label :class="{'upload-button': !hasUploaded, 'upload-button-success': hasUploaded}" for="upload">Upload</label>
@@ -112,8 +112,9 @@ export default {
   input {
     width: 100%;
     padding: 3px;
-    border-color: #E5E5E5;
+    border: 1px solid gray;
     border-radius: 20px;
+    background-color: #E5E5E5;
   }
 
   button {
@@ -123,7 +124,7 @@ export default {
     background-color: #ffffff;
     width: 100%;
     height: 30px;
-    border-color: #E5E5E5;
+    border: 1px solid gray;
     border-radius: 20px;
     transition: background-color 0.5s;
   }
@@ -137,39 +138,38 @@ export default {
   }
 
   .upload-button {
-  cursor: pointer;
-  color: #000000;
-  font-weight: bold;
-  text-align: center;
-  background-color: #ffffff;
-  width: 100%;
-  height: 30px;
-  min-height: 50px;
-  padding: 10px;
-  border: -2px solid;
-  border-color: #E5E5E5;
-  border-radius: 20px;
-  transition: background-color 0.5s;
-}
+    cursor: pointer;
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+    background-color: white;
+    width: 100%;
+    height: 30px;
+    border: -2px solid;
+    border-color: #E5E5E5;
+    transition: background-color 0.5s;
+    border: 1px solid gray;
+    border-radius: 20px;
+  }
 
-.upload-button:hover {
-  background-color: #FCA311;
-}
+  .upload-button:hover {
+    background-color: #FCA311;
+  }
 
-.upload-button-success {
-  cursor: pointer;
-  color: #000000;
-  font-weight: bold;
-  text-align: center;
-  background-color: #6db959;
-  width: 100%;
-  height: 30px;
-  min-height: 50px;
-  padding: 10px;
-  border: -2px solid;
-  border-color: #E5E5E5;
-  border-radius: 20px;
-  transition: background-color 0.5s;
-}
+  .upload-button-success {
+    cursor: pointer;
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+    background-color: #6db959;
+    width: 100%;
+    height: 30px;
+    border: -2px solid;
+    border-color: #E5E5E5;
+    border-radius: 20px;
+    transition: background-color 0.5s;
+    border: 1px solid gray;
+    border-radius: 20px;
+  }
 
 </style>

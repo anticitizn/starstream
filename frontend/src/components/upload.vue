@@ -48,8 +48,7 @@ export default {
   height: 5vh;
   min-height: 50px;
   padding: 10px;
-  border: -2px solid;
-  border-color: #E5E5E5;
+  border: 1px solid gray;
   border-radius: 20px;
   transition: background-color 0.5s;
 }
@@ -68,8 +67,7 @@ export default {
   height: 5vh;
   min-height: 50px;
   padding: 10px;
-  border: -2px solid;
-  border-color: #E5E5E5;
+  border: 1px solid gray;
   border-radius: 20px;
   transition: background-color 0.5s;
 }

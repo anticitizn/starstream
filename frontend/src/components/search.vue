@@ -23,6 +23,14 @@ export default {
           searchValue
       }
   },
+  created() {
+    let searchRequest = { value: ""}
+    axios.post("http://localhost:8000/search/", searchRequest).then(response => {
+      response.data.results.forEach(songId => {
+        this.songContainers.push({ state: "Collapsed", id: songId })
+      })
+    })
+  },
   methods: {
       searchForFileName() {
           this.songContainers.length = 0 // clear the array while making sure that reference isn't lost
@@ -43,6 +51,7 @@ export default {
   height: 5vh;
   min-height: 50px;
   padding: 10px;
+  border: 1px solid gray;
   border-radius: 20px;
   overflow: hidden;
   margin: 20px;

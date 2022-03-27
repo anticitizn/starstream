@@ -75,10 +75,8 @@ export default {
     font-weight: bold;
     background-color: #ffffff;
     width: 100%;
-    height: 5vh;
-    min-height: 40px;
-    padding: 10px;
-    border-color: #E5E5E5;
+    height: 40px;
+    border: 1px solid gray;
     border-radius: 20px;
     transition: background-color 0.5s;
   }
@@ -102,18 +100,11 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
   }
 
   audio {
     width: 100%;
-    padding: 5px;
-    border-radius: 5px;
-    margin: 5px;
-  }
-
-  audio::-webkit-media-controls-panel {
-    border-radius: 20px; 
+    border-radius: 20px;
   }
 
 </style>
