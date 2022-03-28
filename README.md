@@ -11,4 +11,4 @@
 ### Arbeitsaufteilung
 - Docker: Daniel Neykov 2458151
 - Backend: Lukas Löffler 54150708, Daniel Neykov 2458151
-- Frontend: Tim Huprich 8842495, Nico Riedl 7882011
+- Frontend: Tim Huprich 8842495, Nico Riedl 7882011, Daniel Neykov 2458151
