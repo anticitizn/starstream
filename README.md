@@ -1,5 +1,5 @@
-# STARSTREAM
-## An open-source selfhosted mp3 streaming website
+# STARSTREAM - an mp3 streaming website
+### Open-source and self-hosted!
 ![img](https://cdn.discordapp.com/attachments/663174968791662594/957791616909836328/unknown.png)
 
 ### Setup instructions:
