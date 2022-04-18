@@ -7,8 +7,4 @@
 - `cd` inside
 - `docker-compose up` (might be `docker compose up` instead, depending on your docker version
 - Frontend is now available at `localhost:8080`, backend at `localhost:8000`
-
-### Arbeitsaufteilung
-- Docker: Daniel Neykov 2458151
-- Backend: Lukas Löffler 54150708, Daniel Neykov 2458151
-- Frontend: Tim Huprich 8842495, Nico Riedl 7882011, Daniel Neykov 2458151
+- 
