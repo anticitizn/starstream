@@ -1,6 +1,6 @@
 # Get audio file of song with id 1
 
-GET /download/?id=1
+GET /download/1/
 
 RESPONSE 200
 {
@@ -9,7 +9,7 @@ RESPONSE 200
 
 # Get text metadata of song with id 1
 
-GET /getmetadata/?id=1
+GET /getmetadata/1/
 
 RESPONSE 200
 {
@@ -21,7 +21,7 @@ RESPONSE 200
 
 # Get the thumbnail image of song with id 1
 
-GET /getimage/?id=1
+GET /getimage/1/
 
 RESPONSE 200
 {
@@ -49,11 +49,10 @@ POST /upload/
 
 RESPONSE 204
 
-# Set the text metadata of song
+# Set the text metadata of song with id 1
 
-POST /setmetadata/
+POST /setmetadata/1/
 {
-  "id": "",
   "title": "",
   "album": "",
   "artist": "",
