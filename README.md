@@ -1,5 +1,5 @@
 # STARSTREAM - an mp3 streaming website
-![img](https://cdn.discordapp.com/attachments/663174968791662594/957791616909836328/unknown.png)
+<img alt="starstream demo image" src="https://github.com/user-attachments/assets/829de100-ec71-4914-b321-be79523478b3" />
 
 # Setup
 ```
